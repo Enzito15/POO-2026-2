@@ -122,6 +122,25 @@ public class ClienteDaoImpl implements IClienteDao {
 
     @Override
     public Cliente searchByDni(String dni) {
-        return null;
+        Cliente cl = null;
+        String query = "SELECT * FROM cliente WHERE dni=?;";
+        try (Connection cn = ConexionDB.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setString(1,dni);
+            try( ResultSet rs = st.executeQuery()) {
+                if (rs.next()){
+                    cl = new Cliente();
+                    cl.setIdcliente(rs.getInt("idcliente"));
+                    cl.setNombre(rs.getString("nombre"));
+                    cl.setApellidos(rs.getString("apellidos"));
+                    cl.setDni(rs.getString("dni"));
+                    cl.setEmail(rs.getString("email"));
+                    cl.setGenero(rs.getString("genero"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar cliente por Id:" + e.getMessage());
+        }
+        return cl;
     }
 }

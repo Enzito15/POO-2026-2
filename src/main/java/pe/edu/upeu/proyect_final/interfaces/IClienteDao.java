@@ -12,4 +12,5 @@ public interface IClienteDao {
     public List<Cliente> listAll();
 
     public Cliente searchByDni(String dni);
+
 }

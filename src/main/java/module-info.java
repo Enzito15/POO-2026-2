@@ -9,6 +9,9 @@ module pe.edu.upeu.proyect_final {
     requires java.sql;
     //requiero la dependencia del sqlite
     requires org.xerial.sqlitejdbc;
+    requires javafx.base;
+    requires pe.edu.upeu.proyect_final;
+    requires javafx.graphics;
 
     opens pe.edu.upeu.proyect_final to javafx.fxml;
     //Abrir el modelo para que las tablas de FX Funcionen

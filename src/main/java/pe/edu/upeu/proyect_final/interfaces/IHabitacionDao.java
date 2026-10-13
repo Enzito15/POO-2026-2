@@ -11,5 +11,5 @@ public Habitaciones searchById(int id);
 public boolean delete(Habitaciones c);
 public List<Habitaciones> listAll();
 
-public Habitaciones searchByNumHabitacion(String numeroHabitacion);
+public Habitaciones searchByNumero(String numero);
 }

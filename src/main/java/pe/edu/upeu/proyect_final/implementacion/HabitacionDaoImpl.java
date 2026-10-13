@@ -52,7 +52,7 @@ public class HabitacionDaoImpl implements IHabitacionDao {
             flag = true;
 
         } catch (SQLException e) {
-            System.out.println("Error al incertar: " + e.getMessage());
+            System.out.println("Error al actualizar: " + e.getMessage());
         }
         return flag;
     }
@@ -77,7 +77,7 @@ public class HabitacionDaoImpl implements IHabitacionDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error al listar cliente por Id:" + e.getMessage());
+            System.out.println("Error al Buscar Habitacion por Id:" + e.getMessage());
         }
         return hl;
     }
@@ -121,18 +121,18 @@ public class HabitacionDaoImpl implements IHabitacionDao {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error al listar Cliente: " + e.getMessage());
+            System.out.println("Error al listar Habitacion: " + e.getMessage());
         }
         return lista;
     }
 
     @Override
-    public Habitaciones searchByNumHabitacion(String numeroHabitacion) {
+    public Habitaciones searchByNumero(String numero) {
         Habitaciones hl = null;
         String query = "SELECT * FROM habitacion WHERE numeroHabitacion=?;";
         try (Connection cn = ConexionDB.getConnection();
              PreparedStatement st = cn.prepareStatement(query)) {
-            st.setString(1,numeroHabitacion);
+            st.setString(1,numero);
             try( ResultSet rs = st.executeQuery()) {
                 if (rs.next()){
                     hl = new Habitaciones();
@@ -146,7 +146,7 @@ public class HabitacionDaoImpl implements IHabitacionDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error al listar cliente por Id:" + e.getMessage());
+            System.out.println("Error al buscar Habitacion por numero:" + e.getMessage());
         }
         return hl;
     }

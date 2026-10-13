@@ -31,10 +31,10 @@ public class testHabitacion {
     }
     public static void incertar() {
         Habitaciones h = new Habitaciones();
-        h.setNumero(2);
-        h.setNumeroHabitacion(100);
-        h.setNumeroPiso(1);
-        h.setTipo("vip");
+        h.setNumero("1");
+        h.setNumeroHabitacion("25");
+        h.setNumeroPiso("1");
+        h.setTipo("SIMPLE");
         h.setPrecio(200.0);
         h.setEstado("Disponible");
 
@@ -55,7 +55,6 @@ public class testHabitacion {
             System.out.println("delete error");
         }
     }
-
 
     public static void main(String[] args) {
         System.out.println("*************************");

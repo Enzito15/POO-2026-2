@@ -37,17 +37,64 @@ public class HabitacionDaoImpl implements IHabitacionDao {
 
     @Override
     public boolean update(Habitaciones h) {
-        return false;
+        boolean flag = false;
+        String query = "UPDATE habitacion SET numero=?,numeroPiso=?,numeroHabitacion=?,tipo=?,precio=?,estado=?" + "WHERE idhabitacion";
+        try (Connection cn = ConexionDB.getConnection();
+             PreparedStatement st = cn.prepareStatement(query);) {
+            st.setInt(1,h.getNumero());
+            st.setInt(2,h.getNumeroPiso());
+            st.setInt(3,h.getIdhabitacion());
+            st.setString(4,h.getTipo());
+            st.setDouble(5,h.getPrecio());
+            st.setString(6,h.getEstado());
+            st.executeUpdate();
+            flag = true;
+
+        } catch (SQLException e) {
+            System.out.println("Error al incertar: " + e.getMessage());
+        }
+        return flag;
     }
 
     @Override
     public Habitaciones searchById(int id) {
-        return null;
+        Habitaciones hl = null;
+        String query = "SELECT * FROM habitacion WHERE idhabitacion=?;";
+        try (Connection cn = ConexionDB.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setInt(1,id);
+            try( ResultSet rs = st.executeQuery()) {
+                if (rs.next()){
+                    hl = new Habitaciones();
+                    hl.setIdhabitacion(rs.getInt("idhabitacion"));
+                    hl.setNumero(rs.getInt("numero"));
+                    hl.setNumeroPiso(rs.getInt("numeroPíso"));
+                    hl.setNumeroHabitacion(rs.getInt("numeroHabitacion"));
+                    hl.setTipo(rs.getString("tipo"));
+                    hl.setPrecio(rs.getDouble("precio"));
+                    hl.setEstado(rs.getString("estado"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar cliente por Id:" + e.getMessage());
+        }
+        return hl;
     }
 
     @Override
-    public boolean delete(Habitaciones c) {
-        return false;
+    public boolean delete(Habitaciones h) {
+        boolean flag = false;
+        String query = "DELETE FROM habitacion WHERE idhabitacion=?";
+        try (Connection cn = ConexionDB.getConnection();
+             PreparedStatement st = cn.prepareStatement(query);) {
+            st.setInt(1, h.getIdhabitacion());
+            st.executeUpdate();
+            flag = true;
+
+        } catch (SQLException e) {
+            System.out.println("Error al Eliminar: " + e.getMessage());
+        }
+        return flag;
     }
 
     @Override
@@ -80,6 +127,26 @@ public class HabitacionDaoImpl implements IHabitacionDao {
 
     @Override
     public Habitaciones searchByNumHabitacion(String numeroHabitacion) {
-        return null;
+        Habitaciones hl = null;
+        String query = "SELECT * FROM habitacion WHERE numeroHabitacion=?;";
+        try (Connection cn = ConexionDB.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setString(1,numeroHabitacion);
+            try( ResultSet rs = st.executeQuery()) {
+                if (rs.next()){
+                    hl = new Habitaciones();
+                    hl.setIdhabitacion(rs.getInt("idhabitacion"));
+                    hl.setNumero(rs.getInt("numero"));
+                    hl.setNumeroPiso(rs.getInt("numeroPiso"));
+                    hl.setNumeroHabitacion(rs.getInt("numeroHabitacion"));
+                    hl.setTipo(rs.getString("tipo"));
+                    hl.setPrecio(rs.getInt("precio"));
+                    hl.setEstado(rs.getString("estado"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar cliente por Id:" + e.getMessage());
+        }
+        return hl;
     }
 }

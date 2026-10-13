@@ -45,10 +45,24 @@ public class testHabitacion {
             System.out.println("incert incorrecto");
         }
     }
+    public static void eliminar() {
+        Habitaciones h = new Habitaciones();
+        h.setIdhabitacion(2);
+        boolean result = hl.delete(h);
+        if (result) {
+            System.out.println("delete succes");
+        } else {
+            System.out.println("delete error");
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("*************************");
         incertar();
+        System.out.println("*************************");
+        listar();
+        System.out.println("*************************");
+        eliminar();
         System.out.println("*************************");
         listar();
     }

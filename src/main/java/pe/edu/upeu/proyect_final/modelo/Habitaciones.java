@@ -4,36 +4,23 @@ import javafx.beans.property.*;
 
 public class Habitaciones {
     private final IntegerProperty idhabitacion = new SimpleIntegerProperty();
-    private final IntegerProperty numero = new SimpleIntegerProperty(this, "numero");
-    private final IntegerProperty numeroPiso = new SimpleIntegerProperty(this, "numeroPiso");
-    private final IntegerProperty numeroHabitacion = new SimpleIntegerProperty(this, "numeroHabitacion");
-    private final StringProperty tipo = new SimpleStringProperty(this, "tipo");
-    private final StringProperty estado = new SimpleStringProperty(this, "estado");
-    private final DoubleProperty precio = new SimpleDoubleProperty(this, "precio");
+    private final StringProperty numero = new SimpleStringProperty();
+    private final StringProperty numeroPiso = new SimpleStringProperty();
+    private final StringProperty numeroHabitacion = new SimpleStringProperty();
+    private final StringProperty tipo = new SimpleStringProperty();
+    private final DoubleProperty precio = new SimpleDoubleProperty();
+    private final StringProperty estado = new SimpleStringProperty();
 
     public Habitaciones() {
     }
-
-    public Habitaciones(int idhabitacion, int numero, int numeroPiso, int numeroHabitacion, String tipo, String estado, Double precio){
+    public Habitaciones( int idhabitacion, String numero, String numeroPiso, String numeroHabitacion, String tipo, double precio, String estado) {
     setIdhabitacion(idhabitacion);
     setNumero(numero);
     setNumeroPiso(numeroPiso);
-    setIdhabitacion(numeroHabitacion);
+    setNumeroHabitacion(numeroHabitacion);
     setTipo(tipo);
-    setEstado(estado);
     setPrecio(precio);
-    }
-
-    public final double getPrecio() {
-        return precio.get();
-    }
-
-    public final void setPrecio(double value) {
-        precio.set(value);
-    }
-
-    public final DoubleProperty precioProperty() {
-        return precio;
+    setEstado(estado);
     }
 
 
@@ -50,6 +37,19 @@ public class Habitaciones {
     }
 
 
+    public final double getPrecio() {
+        return precio.get();
+    }
+
+    public final void setPrecio(double value) {
+        precio.set(value);
+    }
+
+    public final DoubleProperty precioProperty() {
+        return precio;
+    }
+
+
     public final String getTipo() {
         return tipo.get();
     }
@@ -63,41 +63,41 @@ public class Habitaciones {
     }
 
 
-    public final int getNumeroHabitacion() {
+    public final String getNumeroHabitacion() {
         return numeroHabitacion.get();
     }
 
-    public final void setNumeroHabitacion(int value) {
+    public final void setNumeroHabitacion(String value) {
         numeroHabitacion.set(value);
     }
 
-    public final IntegerProperty numeroHabitacionProperty() {
+    public final StringProperty numeroHabitacionProperty() {
         return numeroHabitacion;
     }
 
 
-    public final int getNumeroPiso() {
+    public final String getNumeroPiso() {
         return numeroPiso.get();
     }
 
-    public final void setNumeroPiso(int value) {
+    public final void setNumeroPiso(String value) {
         numeroPiso.set(value);
     }
 
-    public final IntegerProperty numeroPisoProperty() {
+    public final StringProperty numeroPisoProperty() {
         return numeroPiso;
     }
 
 
-    public final int getNumero() {
+    public final String getNumero() {
         return numero.get();
     }
 
-    public final void setNumero(int value) {
+    public final void setNumero(String value) {
         numero.set(value);
     }
 
-    public final IntegerProperty numeroProperty() {
+    public final StringProperty numeroProperty() {
         return numero;
     }
 
@@ -113,6 +113,5 @@ public class Habitaciones {
     public final IntegerProperty idhabitacionProperty() {
         return idhabitacion;
     }
-
 
 }

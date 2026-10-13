@@ -19,8 +19,8 @@ public class HabitacionDaoImpl implements IHabitacionDao {
         String query = "INSERT INTO habitacion(numero,numeroPiso,numeroHabitacion,tipo,precio,estado)VALUES(?,?,?,?,?,?);";
         try (Connection cn = ConexionDB.getConnection();
              PreparedStatement st = cn.prepareStatement(query);) {
-            st.setInt(1,h.getNumero());
-            st.setInt(2,h.getNumeroPiso());
+            st.setString(1,h.getNumero());
+            st.setString(2,h.getNumeroPiso());
             st.setInt(3,h.getIdhabitacion());
             st.setString(4,h.getTipo());
             st.setDouble(5,h.getPrecio());
@@ -42,8 +42,8 @@ public class HabitacionDaoImpl implements IHabitacionDao {
         String query = "UPDATE habitacion SET numero=?,numeroPiso=?,numeroHabitacion=?,tipo=?,precio=?,estado=?" + "WHERE idhabitacion";
         try (Connection cn = ConexionDB.getConnection();
              PreparedStatement st = cn.prepareStatement(query);) {
-            st.setInt(1,h.getNumero());
-            st.setInt(2,h.getNumeroPiso());
+            st.setString(1,h.getNumero());
+            st.setString(2,h.getNumeroPiso());
             st.setInt(3,h.getIdhabitacion());
             st.setString(4,h.getTipo());
             st.setDouble(5,h.getPrecio());
@@ -68,9 +68,9 @@ public class HabitacionDaoImpl implements IHabitacionDao {
                 if (rs.next()){
                     hl = new Habitaciones();
                     hl.setIdhabitacion(rs.getInt("idhabitacion"));
-                    hl.setNumero(rs.getInt("numero"));
-                    hl.setNumeroPiso(rs.getInt("numeroPíso"));
-                    hl.setNumeroHabitacion(rs.getInt("numeroHabitacion"));
+                    hl.setNumero(rs.getString("numero"));
+                    hl.setNumeroPiso(rs.getString("numeroPíso"));
+                    hl.setNumeroHabitacion(rs.getString("numeroHabitacion"));
                     hl.setTipo(rs.getString("tipo"));
                     hl.setPrecio(rs.getDouble("precio"));
                     hl.setEstado(rs.getString("estado"));
@@ -110,9 +110,9 @@ public class HabitacionDaoImpl implements IHabitacionDao {
             while (rs.next()) {
                 Habitaciones hl = new Habitaciones();
                 hl.setIdhabitacion(rs.getInt("idhabitacion"));
-                hl.setNumero(rs.getInt("numero"));
-                hl.setNumeroPiso(rs.getInt("numeroPiso"));
-                hl.setNumeroHabitacion(rs.getInt("numeroHabitacion"));
+                hl.setNumero(rs.getString("numero"));
+                hl.setNumeroPiso(rs.getString("numeroPiso"));
+                hl.setNumeroHabitacion(rs.getString("numeroHabitacion"));
                 hl.setTipo(rs.getString("tipo"));
                 hl.setPrecio(rs.getDouble("precio"));
                 hl.setEstado(rs.getString("estado"));
@@ -137,9 +137,9 @@ public class HabitacionDaoImpl implements IHabitacionDao {
                 if (rs.next()){
                     hl = new Habitaciones();
                     hl.setIdhabitacion(rs.getInt("idhabitacion"));
-                    hl.setNumero(rs.getInt("numero"));
-                    hl.setNumeroPiso(rs.getInt("numeroPiso"));
-                    hl.setNumeroHabitacion(rs.getInt("numeroHabitacion"));
+                    hl.setNumero(rs.getString("numero"));
+                    hl.setNumeroPiso(rs.getString("numeroPiso"));
+                    hl.setNumeroHabitacion(rs.getString("numeroHabitacion"));
                     hl.setTipo(rs.getString("tipo"));
                     hl.setPrecio(rs.getInt("precio"));
                     hl.setEstado(rs.getString("estado"));

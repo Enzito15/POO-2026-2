@@ -10,7 +10,6 @@ module pe.edu.upeu.proyect_final {
     //requiero la dependencia del sqlite
     requires org.xerial.sqlitejdbc;
     requires javafx.base;
-    requires pe.edu.upeu.proyect_final;
     requires javafx.graphics;
 
     opens pe.edu.upeu.proyect_final to javafx.fxml;

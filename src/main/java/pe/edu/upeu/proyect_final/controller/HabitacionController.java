@@ -77,43 +77,13 @@ public class HabitacionController {
         tableHabitaciones.setItems(listaHabitaciones);
     }
 
-    @FXML
-    private void handleDelete() {
-        Habitaciones selectId = tableHabitaciones.getSelectionModel().getSelectedItem();
-        if (selectId != null) {
-            Alert confirm = utilAlerts.mostrarAlerts("Confirmar eliminacion",
-                    "Estas seguro de eliminar el cliente " + selectId.getNumero() + "?", "CONFIRMATION");
-            Optional<ButtonType> result = confirm.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (iHabitacionDao.delete(selectId)) {
-                    listaHabitaciones.remove(selectId);
-                } else {
-                    Alert warning = utilAlerts.mostrarAlerts("seleccion requerida",
-                            "seleccione un cliente para eliminar ", "WARNING");
-                    warning.showAndWait();
-                }
-            }
-
-        }
-    }
 
     @FXML
     private void handleNew() {
-        System.out.println("Abriendo el formulario");
-        showForm(null);
+        //System.out.println("Abriendo el formulario");
+        //showForm(null);
     }
-    @FXML
-    private void handleEdit(){
-        Habitaciones selectHabitaciones = tableHabitaciones.getSelectionModel().getSelectedItem();
-        if (selectHabitaciones !=null){
-            Cliente clientFull = iHabitacionDao.searchById(selectHabitaciones.getIdhabitacion());
-            showForm(clientFull);
-        }else{
-            Alert alert = utilAlerts.mostrarAlerts("Seleccion requerida","", "WARNING");
-            alert.show();
-        }
-    }
-
+/*
     private void showForm(Cliente c) {
         try {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/pe/edu/upeu/proyect_final/view/cliente-form.fxml"));
@@ -155,5 +125,7 @@ public class HabitacionController {
     }
 
 }
+
+ */
 
 }

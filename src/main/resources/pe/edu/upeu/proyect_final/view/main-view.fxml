@@ -53,6 +53,8 @@
             <children>
                 <Button maxWidth="-Infinity" onAction="#showHome" mnemonicParsing="false" styleClass="nav-button" text="inicio"/>
                 <Button maxWidth="-Infinity" onAction="#showClient" mnemonicParsing="false" styleClass="nav-button" text="Clientes"/>
+                <Button maxWidth="-Infinity" onAction="#showHabitacion" mnemonicParsing="false" styleClass="nav-button" text="Habitaciones"/>
+
             </children>
 
         </VBox>

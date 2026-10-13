@@ -26,6 +26,10 @@ public class MainController {
     private void showClient(){
         loadview("cliente-view.fxml");
     }
+    @FXML
+    private void showHabitacion(){
+        loadview("habitacion-view.fxml");
+    }
 
     //metodo que llama y busca a las vistas
     private void loadview(String fxml) {

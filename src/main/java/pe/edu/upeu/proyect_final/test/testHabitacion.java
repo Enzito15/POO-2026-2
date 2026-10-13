@@ -56,6 +56,7 @@ public class testHabitacion {
         }
     }
 
+
     public static void main(String[] args) {
         System.out.println("*************************");
         incertar();

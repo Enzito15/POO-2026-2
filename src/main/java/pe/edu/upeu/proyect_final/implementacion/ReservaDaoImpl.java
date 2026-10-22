@@ -59,11 +59,11 @@ public class ReservaDaoImpl implements IReservaDao {
     public List<Reserva> rlistAll() {
         List<Reserva> lista = new ArrayList<>();
         String query = " SELECT r.*,c.nombre|| '' ||c.apellidos AS nombre_completo," +
-                "c.dni,c.email,h.numero,h.numeroPiso," +
-                "h.numeroHabitacion,h.tipo,h.estado AS estado_hab" +
-                "FROM reserva r,cliente c,habitacion h" +
-                "WHERE r.clienteId = c.idcliente" +
-                "AND r.habitacionId = h.idhabitacion";
+                " c.dni,c.email,h.numero,h.numeroPiso," +
+                " h.numeroHabitacion,h.tipo,h.estado AS estado_hab, h.precio " +
+                " FROM reserva r,cliente c,habitacion h " +
+                " WHERE r.clienteId = c.idcliente " +
+                " AND r.habitacionId = h.idhabitacion ";
         try (Connection cn = ConexionDB.getConnection();
              PreparedStatement st = cn.prepareStatement(query);
              ResultSet rs = st.executeQuery();
@@ -71,7 +71,7 @@ public class ReservaDaoImpl implements IReservaDao {
             while (rs.next()) {
                 //instancia de objetos relacionados
                 Cliente cl = new Cliente();
-                cl.setIdcliente(rs.getInt("idcliente"));
+                cl.setIdcliente(rs.getInt("clienteId"));
                 cl.setNombre(rs.getString("nombre_completo"));
                 cl.setDni(rs.getString("dni"));
                 cl.setEmail(rs.getString("email"));
@@ -104,11 +104,38 @@ public class ReservaDaoImpl implements IReservaDao {
 
     @Override
     public boolean updateStatus(Reserva r) {
-        return false;
+        boolean flag = false;
+        String query = " UPDATE reserva SET estado = ? WHERE idreserva=?;";
+        try (Connection cn = ConexionDB.getConnection();
+             PreparedStatement st = cn.prepareStatement(query);) {
+            st.setString(1, r.getEstado());
+            st.setInt(2, r.getIdreserva());
+            st.executeUpdate();
+            flag = true;
+
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar reserva: " + e.getMessage());
+        }
+        return flag;
     }
 
     @Override
     public boolean validateHabitacion(Reserva r) {
-        return false;
+        boolean flag = false;
+        String query = " SELECT count(*) FROM reserva WHERE habitacionId=? " +
+                " AND estado IN('R','O') " +
+                " AND (? < fecha_salida AND ? > fecha_ingreso) ";
+        try (Connection cn = ConexionDB.getConnection();
+             PreparedStatement st = cn.prepareStatement(query);) {
+            st.setInt(1, r.getHabitacion().getIdhabitacion());
+            st.setString(2, r.getFecha_ingreso().toString());
+            st.setString(2, r.getFecha_salida().toString());
+            st.executeUpdate();
+            flag = true;
+
+        } catch (SQLException e) {
+            System.out.println("Error al validar Hbitacion: " + e.getMessage());
+        }
+        return flag;
     }
 }

@@ -15,8 +15,22 @@ public class Reserva {
 
     private final ObjectProperty<Cliente> cliente = new SimpleObjectProperty<>();
     private final ObjectProperty<Habitaciones> habitacion = new SimpleObjectProperty<>();
+    private final ObjectProperty<Usuario> usuario = new SimpleObjectProperty<>();
+
 
     public Reserva() {
+    }
+
+    public final Usuario getUsuario() {
+        return usuario.get();
+    }
+
+    public final void setUsuario(Usuario value) {
+        usuario.set(value);
+    }
+
+    public final ObjectProperty<Usuario> usuarioProperty() {
+        return usuario;
     }
 
     public final Habitaciones getHabitacion() {

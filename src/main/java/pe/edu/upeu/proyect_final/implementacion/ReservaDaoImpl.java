@@ -4,6 +4,7 @@ import pe.edu.upeu.proyect_final.interfaces.IReservaDao;
 import pe.edu.upeu.proyect_final.modelo.Cliente;
 import pe.edu.upeu.proyect_final.modelo.Habitaciones;
 import pe.edu.upeu.proyect_final.modelo.Reserva;
+import pe.edu.upeu.proyect_final.modelo.Usuario;
 import pe.edu.upeu.proyect_final.utils.ConexionDB;
 
 import java.sql.Connection;
@@ -20,7 +21,7 @@ public class ReservaDaoImpl implements IReservaDao {
     public boolean insert(Reserva r) {
         boolean flag = false;
         String query = "INSERT INTO reserva (clienteId,habitacionId,fecha_reserva,fecha_ingreso," +
-                "fecha_salida,estado,total) VALUES(?,?,?,?,?,?,?)";
+                "fecha_salida,estado,total,usuarioId) VALUES(?,?,?,?,?,?,?,?)";
         try (Connection cn = ConexionDB.getConnection();
              PreparedStatement st = cn.prepareStatement(query);) {
             st.setInt(1, r.getCliente().getIdcliente());
@@ -31,6 +32,7 @@ public class ReservaDaoImpl implements IReservaDao {
             st.setString(5, r.getFecha_salida().toString());
             st.setString(6, r.getEstado());
             st.setDouble(7, r.getTotal());
+            st.setInt(8, r.getUsuario().getIdusuario());
             st.executeUpdate();
             flag = true;
 
@@ -60,10 +62,11 @@ public class ReservaDaoImpl implements IReservaDao {
         List<Reserva> lista = new ArrayList<>();
         String query = " SELECT r.*,c.nombre|| '' ||c.apellidos AS nombre_completo," +
                 " c.dni,c.email,h.numero,h.numeroPiso," +
-                " h.numeroHabitacion,h.tipo,h.estado AS estado_hab, h.precio " +
-                " FROM reserva r,cliente c,habitacion h " +
+                " h.numeroHabitacion,h.tipo,h.estado AS estado_hab,u.usuario, h.precio " +
+                " FROM reserva r,cliente c,habitacion h,usuario u " +
                 " WHERE r.clienteId = c.idcliente " +
-                " AND r.habitacionId = h.idhabitacion ";
+                " AND r.habitacionId = h.idhabitacion " +
+                " AND r.usuarioId = u.idusuario";
         try (Connection cn = ConexionDB.getConnection();
              PreparedStatement st = cn.prepareStatement(query);
              ResultSet rs = st.executeQuery();
@@ -81,6 +84,10 @@ public class ReservaDaoImpl implements IReservaDao {
                 h.setNumero(rs.getString("numero"));
                 h.setPrecio(rs.getDouble("precio"));
                 h.setTipo(rs.getString("tipo"));
+
+                Usuario u = new Usuario();
+                u.setIdusuario(rs.getInt("usuarioId"));
+                u.setUser(rs.getString("user"));
                 //crear la reserva y asignar objetos
                 Reserva r = new Reserva();
                 r.setIdreserva(rs.getInt("idreserva"));
@@ -92,6 +99,7 @@ public class ReservaDaoImpl implements IReservaDao {
                 //conectamos los objetos
                 r.setCliente(cl);
                 r.setHabitacion(h);
+                r.setUsuario(u);
                 lista.add(r);
 
             }

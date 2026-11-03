@@ -9,7 +9,9 @@ public class UtilAlerts {
             alert = new Alert(Alert.AlertType.WARNING);
         } else if (tipo.equals("CONFIRMATION")) {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
-        } else {
+        } else if (tipo.equals("INFORMATION")) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+        }else {
             alert = new Alert(Alert.AlertType.ERROR);
         }
         alert.setTitle(titulo);

@@ -23,7 +23,6 @@ public class MainController {
         }
         showHome();
     }
-
     @FXML
     private void showHome() {
         loadview("home-view.fxml");
@@ -36,6 +35,10 @@ public class MainController {
     @FXML
     private void showHabitacion(){
         loadview("habitacion-view.fxml");
+    }
+    @FXML
+    private void showReserva(){
+        loadview("reserva-view.fxml");
     }
     @FXML
     private void handleLogout(){

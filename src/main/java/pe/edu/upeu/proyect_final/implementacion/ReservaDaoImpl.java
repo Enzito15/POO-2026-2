@@ -62,7 +62,7 @@ public class ReservaDaoImpl implements IReservaDao {
         List<Reserva> lista = new ArrayList<>();
         String query = " SELECT r.*,c.nombre|| '' ||c.apellidos AS nombre_completo," +
                 " c.dni,c.email,h.numero,h.numeroPiso," +
-                " h.numeroHabitacion,h.tipo,h.estado AS estado_hab,u.usuario, h.precio " +
+                " h.numeroHabitacion,h.tipo,h.estado AS estado_hab,u.user, h.precio " +
                 " FROM reserva r,cliente c,habitacion h,usuario u " +
                 " WHERE r.clienteId = c.idcliente " +
                 " AND r.habitacionId = h.idhabitacion " +

@@ -54,6 +54,7 @@
                 <Button maxWidth="-Infinity" onAction="#showHome" mnemonicParsing="false" styleClass="nav-button" text="inicio"/>
                 <Button maxWidth="-Infinity" onAction="#showClient" mnemonicParsing="false" styleClass="nav-button" text="Clientes"/>
                 <Button maxWidth="-Infinity" onAction="#showHabitacion" mnemonicParsing="false" styleClass="nav-button" text="Habitaciones"/>
+                <Button maxWidth="-Infinity" onAction="#showReserva" mnemonicParsing="false" styleClass="nav-button" text="Reserva"/>
                 <Region VBox.vgrow="ALWAYS"/>
                 <Button maxWidth="-Infinity" mnemonicParsing="false" style="-fx-text-fill: #ff6666" styleClass="nav-buttom" text="Cerrar Sssion" onAction="#handleLogout"/>
 

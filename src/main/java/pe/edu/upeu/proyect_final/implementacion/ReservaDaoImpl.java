@@ -129,7 +129,7 @@ public class ReservaDaoImpl implements IReservaDao {
 
     @Override
     public boolean validateHabitacion(Reserva r) {
-        boolean flag = false;
+        boolean ocupada = false;
         String query = " SELECT count(*) FROM reserva WHERE habitacionId=? " +
                 " AND estado IN('R','O') " +
                 " AND (? < fecha_salida AND ? > fecha_ingreso) ";
@@ -139,11 +139,15 @@ public class ReservaDaoImpl implements IReservaDao {
             st.setString(2, r.getFecha_ingreso().toString());
             st.setString(2, r.getFecha_salida().toString());
             st.executeUpdate();
-            flag = true;
+            try(ResultSet rs = st.executeQuery()) {
+                if (rs.next()){
+                    ocupada = rs.getInt(1)>8;
+                }
+            }
 
         } catch (SQLException e) {
             System.out.println("Error al validar Hbitacion: " + e.getMessage());
         }
-        return flag;
+        return ocupada;
     }
 }

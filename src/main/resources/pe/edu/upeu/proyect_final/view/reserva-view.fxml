@@ -21,7 +21,7 @@
                 <font><Font name="System Bold" size="20.0"/></font>
             </Label>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button mnemonicParsing="false" styleClass="button-login" text="Nueva Reserva"/>
+            <Button onAction="#handleNew" mnemonicParsing="false" styleClass="button-login" text="Nueva Reserva"/>
         </HBox>
         <TableView fx:id="tableReserva" VBox.vgrow="ALWAYS">
             <columns>
@@ -40,9 +40,9 @@
         </TableView>
         <HBox alignment="CENTER_RIGHT" spacing="10.0">
             <children>
-                <Button mnemonicParsing="false" styleClass="button-action-edit" text="Check-In"/>
-                <Button mnemonicParsing="false" styleClass="button-action-delete" text="Check-Out"/>
-                <Button mnemonicParsing="false" styleClass="button-action-cancel" text="Cancelar"/>
+                <Button mnemonicParsing="false" onAction="#handleCheckIn" styleClass="button-action-edit" text="Check-In"/>
+                <Button mnemonicParsing="false" onAction="#handleCheckOut" styleClass="button-action-delete" text="Check-Out"/>
+                <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="button-action-cancel" text="Cancelar"/>
             </children>
         </HBox>
     </children>
